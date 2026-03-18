@@ -2,39 +2,33 @@
   <h1 class="font-bold text-4xl text-center">Eva Armenta Art</h1>
   <p>Find me in app/views/home/index.html.erb</p>
 </div>
-<div class="w-1/1">
+<div class="w-full flex-col justify-start items-center">
   <%= link_to category_path("abstarct-paintings") do %>
-    <!-- image from  @abstract_paintings_first.photos.first -->
-    <div class="w-9/10 aspect[9/16]">
+    <div class="w-9/10 aspect[9/16] home-cards">
       <% if  @abstract_paintings_first&.photos&.any? %>
-        <%= image_tag  @abstract_paintings_first.photos.first.variant(resize_to_limit: [400,400]),
-                      alt: "Abstarct-Paintings" %>
+        <%= image_tag  @abstract_paintings_first.photos.first.variant(resize_to_limit: [400,400]), alt: "Abstarct-Paintings" %>
       <% else %>
-        <div class="placeholder">Abstarct-Paintings</div>
+        <div class="w-9/10 aspect[9/16]"><p>The Category Abstract Paintings is Currently Empty</p></div>
       <% end %>
-      <h3>Tiny Paintings</h3>
+      <h3>Abstract Paintings</h3>
     </div>
   <% end %>
   <%= link_to category_path("flowers-and-still-lifes") do %>
-    <!-- image from @tiny_first.photos.first if exists -->
-    <div class="w-9/10 aspect[9/16]">
+    <div class="w-9/10 aspect[9/16] home-cards">
       <% if @flowers_and_still_lifes_first&.photos&.any? %>
-        <%= image_tag @flowers_and_still_lifes_first.photos.first.variant(resize_to_limit: [400,400]),
-                      alt: "Flowers-and-Still-Lifes" %>
+        <%= image_tag @flowers_and_still_lifes_first.photos.first.variant(resize_to_limit: [400,400]), alt: "Flowers-and-Still-Lifes" %>
       <% else %>
-        <div class="placeholder">Flowers-and-Still-Lifes</div>
+        <div class="w-9/10 aspect[9/16]"><p>The Category Flowers and Still Lifes is Currently Empty</p></div>
       <% end %>
       <h3>Flowers-and-Still-Lifes</h3>
     </div>
   <% end %>
   <%= link_to category_path("tiny-art") do %>
-    <!-- image from @tiny_art_first.photos.first -->
-    <div class="w-9/10 aspect[9/16]">
+    <div class="w-9/10 aspect[9/16] home-cards">
       <% if @tiny_art_first&.photos&.any? %>
-        <%= image_tag @tiny_art_first.photos.first.variant(resize_to_limit: [400,400]),
-                      alt: "Tiny-Art" %>
+        <%= image_tag @tiny_art_first.photos.first.variant(resize_to_limit: [400,400]), alt: "Tiny-Art" %>
       <% else %>
-        <div class="placeholder">Tiny-Art</div>
+        <div class="w-9/10 aspect[9/16]"><p>The Category Tiny Art is Cuurrently Empty</p></div>
       <% end %>
       <h3>Tiny-Art</h3>
     </div>

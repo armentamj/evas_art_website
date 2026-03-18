@@ -1,0 +1,9 @@
+{
+    "emmet.includeLanguages": {
+  "erb": "html",
+  "ruby": "html",
+  "html.erb": "html"
+},
+"emmet.triggerExpansionOnTab": true,
+"emmet.showSuggestionsAsSnippets": true
+}? Also, it was empty and only had this {}

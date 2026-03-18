@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  allow_unauthenticated_access only: :index
   def index
     # Base scope – newest first (change :desc to :asc if you prefer oldest first)
     base = Artwork.order(created_at: :desc)

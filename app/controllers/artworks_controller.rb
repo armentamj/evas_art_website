@@ -1,6 +1,8 @@
 class ArtworksController < ApplicationController
   before_action :require_authentication, only: [ :new, :create, :edit, :update, :destroy ]
 
+  allow_unauthenticated_access only: %i[index show]
+
   before_action :set_artwork, only: [ :show, :edit, :update, :destroy ]
   # GET /artworks or /artworks.json
   def index
