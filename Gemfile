@@ -40,8 +40,8 @@ gem "thruster", require: false
 # Adding Tailwind to Rails
 gem "tailwindcss-rails"
 
-# Adding the bcrypt gem
-gem "bcrypt", "~> 3.1.7"
+# Adding gem for verification because the verification is not included on active storage
+gem "active_storage_validations"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -60,6 +60,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # To see the letters on localhost:3000
+  gem "letter_opener"
 end
 
 group :test do

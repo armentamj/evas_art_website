@@ -4,24 +4,34 @@ class ArtworksController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
 
   before_action :set_artwork, only: [ :show, :edit, :update, :destroy ]
-  # GET /artworks or /artworks.json
+
+  # GET /artworks or /artworks?category=...
   def index
-    @artworks = Artwork.order(created_at: :desc)  # or your preferred order
+    @artworks = Artwork.order(created_at: :desc)
 
-    if params[:slug].present? || params[:category].present?
-      # Handle both friendly slug and query param style
-      category_slug = params[:slug] || params[:category]
-      category_name = category_slug.to_s.titleize.gsub("-", " ")
+    # Check for either :slug (from your category_path) or :category params
+    if (category_slug = params[:slug] || params[:category]).present?
+      # 1. Replace hyphens with spaces: "abstract-paintings" -> "abstract paintings"
+      # 2. Titleize: "abstract paintings" -> "Abstract Paintings"
+      category_name = category_slug.gsub("-", " ").titleize.strip
 
-      @artworks = @artworks.where(category: category_name)
-      @current_category = category_name   # for display in view
+      # Use a case-insensitive search to be extra safe
+      @artworks = @artworks.where("LOWER(category) = ?", category_name.downcase)
+      @current_category = category_name
     end
 
-    # Optional: add pagination later
-    # @artworks = @artworks.page(params[:page]).per(12)
+    # Handling the ID lookup/redirect
+    if params[:id].present?
+      artwork = Artwork.find_by(id: params[:id])
+      if artwork
+        redirect_to artwork_path(artwork) and return
+      else
+        flash.now[:alert] = "No artwork found with ID #{params[:id]}"
+      end
+    end
   end
 
-  # GET /artworks/1 or /artworks/1.json
+  # GET /artworks/1
   def show
   end
 
@@ -34,52 +44,50 @@ class ArtworksController < ApplicationController
   def edit
   end
 
-  # POST /artworks or /artworks.json
+  # POST /artworks
   def create
     @artwork = Artwork.new(artwork_params)
 
-    respond_to do |format|
-      if @artwork.save
-        format.html { redirect_to @artwork, notice: "Artwork was successfully created." }
-        format.json { render :show, status: :created, location: @artwork }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @artwork.errors, status: :unprocessable_entity }
-      end
+    # Add this line to assign the logged-in user
+    @artwork.user = Current.user
+
+    if @artwork.save
+      redirect_to @artwork, notice: "Artwork was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /artworks/1 or /artworks/1.json
+
+  # PATCH/PUT /artworks/1
   def update
-    respond_to do |format|
-      if @artwork.update(artwork_params)
-        format.html { redirect_to @artwork, notice: "Artwork was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @artwork }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @artwork.errors, status: :unprocessable_entity }
-      end
+    if @artwork.update(artwork_params)
+      redirect_to @artwork, notice: "Artwork was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /artworks/1 or /artworks/1.json
+  # DELETE /artworks/1
   def destroy
     @artwork.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to artworks_path, notice: "Artwork was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to artworks_path, notice: "Artwork was successfully destroyed.", status: :see_other
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_artwork
       @artwork = Artwork.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def artwork_params
-      params.expect(artwork: [ :title, :description, :price, :category, :size ])
+      params.expect(artwork: [
+        :title,
+        :description,
+        :price,
+        :category,
+        :size,
+        images: []
+      ])
     end
 end

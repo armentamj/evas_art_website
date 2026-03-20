@@ -58,7 +58,19 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.default_url_options = { host: "evaarmentaart.de" }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    # remember to sign up for postmark for eva's website
+    address:         "smtp.postmarkapp.com",
+    port:            587,
+    domain:          "evaarmentaart.de",
+    user_name:       ENV["SMTP_USERNAME"],
+    password:        ENV["SMTP_PASSWORD"],
+    authentication:  "plain",
+    enable_starttls_auto: true
+  }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {

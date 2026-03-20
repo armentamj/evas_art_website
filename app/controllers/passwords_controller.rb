@@ -14,13 +14,20 @@ class PasswordsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by_token_for(:password_reset, params[:token])
+
+    if @user.nil?
+      redirect_to new_password_path, alert: "Invalid or expired password reset link."
+    end
   end
 
   def update
-    if @user.update(params.permit(:password, :password_confirmation))
-      redirect_to new_session_path, notice: "Password has been reset."
+    @user = User.find_by_token_for(:password_reset, params[:token])
+
+    if @user&.update(params.expect(user: [ :password, :password_confirmation ]))
+      redirect_to new_session_path, notice: "Password has been reset successfully. Please log in."
     else
-      redirect_to edit_password_path(params[:token]), alert: "Passwords did not match."
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -1,15 +1,26 @@
-<% content_for :title, "Showing artwork" %>
-
-<div class="md:w-2/3 w-full">
+<div class="md:w-2/3 w-full relative">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <p class="py-1 px-2 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing artwork</h1>
-
   <%= render @artwork %>
-
-  <%= link_to "Edit this artwork", edit_artwork_path(@artwork), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to artworks", artworks_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this artwork", @artwork, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <% 
+    # Prepare the email content using the @artwork instance variable
+    mail_subject = "Purchase Inquiry: #{@artwork.title} (ID: #{@artwork.id})"
+    mail_body = "Hello,\n\nI am interested in purchasing the following artwork:\n\n" \
+                "Name: #{@artwork.title}\n" \
+                "ID: #{@artwork.id}\n" \
+                "Price: $#{number_with_precision(@artwork.price, precision: 2)}\n\n" \
+                "Please send your PayPal information.\n\n" \
+                "Thank you!"
+                # URL encode the subject and body to prevent broken links
+                mail_params = { subject: mail_subject, body: mail_body }.to_query
+  %>
+  <%= link_to "Purchase", "mailto:evaarmenta@gmail.com?#{mail_params}", class: "absolute bottom-5 left-1/2 -translate-x-1/2 w-fit z-10 text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
+  <div class="flex justify-end items-center absolute bottom-5 lg:bottom-0 right-5 lg:roght-0">
+    <% if authenticated? %>
+      <%= link_to "Edit", edit_artwork_path(@artwork), class: "mx-1 w-full text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-blue-50 font-medium  hover:text-white" %>
+      <%= button_to "Delete", @artwork, method: :delete, class: "mx-1 text-red-600 w-full rounded-md px-2 py-1 hover:bg-pink-500 hover:text-white bg-blue-50 font-medium cursor-pointer shadow-lg", data: { turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
 </div>
