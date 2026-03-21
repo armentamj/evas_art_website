@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="w-screen flex flex-col justify-start items-center">
-  <head class="relative">
+  <head>
     <title><%= content_for(:title) || "Evas Art Website" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,7 +14,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <nav class="navi fixed top-0 left-0 h-20 md:h-20 lg:h-28 w-full p-6 flex justify-between items-end flex-col md:flex-col lg:flex-row bg-blue-500 z-[2]">
+    <nav class="navi fixed top-0 left-0 h-20 lg:h-28 w-full p-6 flex justify-between items-end flex-col md:flex-col lg:flex-row bg-white z-[2] border-b-1 border-b-{black}">
       <button id="menu-btn" class="block lg:hidden text-2xl focus:outline-none cursor-pointer text-black absolute top-25 left-10">
         <i id="menu-icon" class="fa-solid fa-xmark"></i>
         <i id="x-icon" class="fa-solid fa-bars hidden"></i>
@@ -55,8 +55,8 @@
 
     <%= javascript_importmap_tags %>
   </head>
-  <body class="mt-20 lg:mt-35 w-full h-fit flex flex-col justify-start items-center">
-    <main class="h-fit w-full flex flex-col justify-start items-center pt-5">
+  <body class="mt-20 md:mt-35 w-full h-fit flex flex-col justify-start items-center">
+    <main class="h-fit w-full flex flex-col justify-start items-center">
       <%= yield %>
     </main>
   </body>

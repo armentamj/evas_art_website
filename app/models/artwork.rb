@@ -1,5 +1,5 @@
 class Artwork < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: false
   #    ↑ This assumes you have a User model.
   #    It adds a `user_id` column automatically if you ran:
   #    rails g model Artwork ... user:references

@@ -16,8 +16,8 @@
                 # URL encode the subject and body to prevent broken links
                 mail_params = { subject: mail_subject, body: mail_body }.to_query
   %>
-  <%= link_to "Purchase", "mailto:evaarmenta@gmail.com?#{mail_params}", class: "absolute bottom-5 left-1/2 -translate-x-1/2 w-fit z-10 text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
-  <div class="flex justify-end items-center absolute bottom-5 lg:bottom-0 right-5 lg:roght-0">
+  <%= link_to "Purchase", "mailto:evaarmentaart@gmail.com?#{mail_params}", class: "absolute bottom-5 left-1/2 -translate-x-1/2 w-fit z-10 text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
+  <div class="flex justify-end items-center absolute bottom-5 right-5 lg:roght-0">
     <% if authenticated? %>
       <%= link_to "Edit", edit_artwork_path(@artwork), class: "mx-1 w-full text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-blue-50 font-medium  hover:text-white" %>
       <%= button_to "Delete", @artwork, method: :delete, class: "mx-1 text-red-600 w-full rounded-md px-2 py-1 hover:bg-pink-500 hover:text-white bg-blue-50 font-medium cursor-pointer shadow-lg", data: { turbo_confirm: "Are you sure?" } %>
