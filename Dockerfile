@@ -31,6 +31,7 @@ FROM base AS build
 RUN apk add --no-cache build-base git yaml-dev
 
 COPY Gemfile Gemfile.lock ./
+RUN mkdir app/assets/builds
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
