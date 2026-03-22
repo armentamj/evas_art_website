@@ -20,7 +20,7 @@ RUN apk add --no-cache \
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development test"
+    BUNDLE_WITHOUT="development test" \
     RUBYOPT="--yjit"
 
 
