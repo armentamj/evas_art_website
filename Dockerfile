@@ -37,6 +37,8 @@ COPY . .
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
+RUN mkdir app/assets/builds
+
 # Precompile bootsnap & assets (Tailwind binary runs here)
 RUN bundle exec bootsnap precompile app/ lib/ && \
     SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
