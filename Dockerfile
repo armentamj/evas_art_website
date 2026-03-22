@@ -10,7 +10,7 @@ WORKDIR /rails
 # libvips: for image_processing (Active Storage)
 RUN apk add --no-cache \
     curl \
-    libvips \
+    vips \
     sqlite-libs \
     tzdata \
     gcompat \
