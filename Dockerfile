@@ -37,6 +37,7 @@ COPY . .
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
+RUN echo "First Bundle install success"
 
 # Precompile bootsnap & assets (Tailwind binary runs here)
 RUN bundle exec bootsnap precompile app/ lib/ && \
