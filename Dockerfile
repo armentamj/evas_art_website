@@ -31,12 +31,12 @@ FROM base AS build
 RUN apk add --no-cache build-base git yaml-dev
 
 COPY Gemfile Gemfile.lock ./
-RUN mkdir app/assets/builds
+
+COPY . .
+
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
-
-COPY . .
 
 # Precompile bootsnap & assets (Tailwind binary runs here)
 RUN bundle exec bootsnap precompile app/ lib/ && \
