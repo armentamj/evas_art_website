@@ -9,7 +9,7 @@
   <div id="artworks" class="min-w-80 divide-y divide-gray-200 space-y-5">
     <% if @artworks.any? %>
       <% @artworks.each do |artwork| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
+        <div class="flex flex-col justify-between items-center md:pb-5 pb-0">
           <!-- Wrap the partial in a link_to block -->
           <%= link_to artwork, class: "block w-full hover:opacity-90 transition-opacity" do %>
             <%= render artwork %>

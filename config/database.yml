@@ -4,10 +4,14 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  journal_mode: WAL
+  synchronous: NORMAL
+  mmap_size: 134217728 # Uses 128MB of RAM to "map" the DB for instant access
 
 development:
   <<: *default
@@ -19,7 +23,6 @@ development:
 test:
   <<: *default
   database: storage/test.sqlite3
-
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.

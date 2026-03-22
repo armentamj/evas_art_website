@@ -1,14 +1,14 @@
-#!/bin/bash -e
+#!/bin/bash
+set -e
 
-# Enable jemalloc for reduced memory usage and latency.
-if [ -z "${LD_PRELOAD+x}" ]; then
-    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
-    export LD_PRELOAD
-fi
+# 1. Remove a stale server.pid if it exists (prevents boot errors)
+rm -f /rails/tmp/pids/server.pid
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+# 2. If we are starting the server, prepare the SQLite database
+# This creates the production.sqlite3 file and runs migrations
+if [ "$1" = "./bin/thrust" ]; then
   ./bin/rails db:prepare
 fi
 
-exec "${@}"
+# 3. Execute the command provided to the container (the CMD from Dockerfile)
+exec "$@"

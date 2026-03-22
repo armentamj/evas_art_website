@@ -1,0 +1,24 @@
+# compose.yml
+services:
+  web:
+    build: .
+    # This maps port 80 on your server to port 80 in the container
+    ports:
+      - "80:80"
+
+    # Environment variables for Rails and Postmark
+    environment:
+      - RAILS_ENV=production
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      # This tells Rails where the SQLite file lives
+      - DATABASE_URL=sqlite3:/rails/storage/production.sqlite3
+
+    # CRITICAL: This keeps your database and uploaded art safe if the container stops
+    volumes:
+      - rails_storage:/rails/storage
+
+# This creates a persistent "hard drive" space managed by Docker
+volumes:
+  rails_storage:

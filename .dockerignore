@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+!/.env*erb
 
 # Ignore all default key files.
 /config/master.key
@@ -49,3 +50,14 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+# Ignore local tailwind binaries
+/exe/tailwindcss-*
+
+# This skips the heavy node_modules folder
+/node_modules/
+
+# This skips all log files but keeps the folder structure
+/log/*
+!/log/.keep
+

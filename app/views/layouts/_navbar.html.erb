@@ -1,0 +1,36 @@
+<nav class="navi fixed top-0 left-0 h-20 lg:h-28 w-full p-6 flex justify-between items-center bg-white z-10 border-b border-black">
+  
+  <!-- Mobile Toggle (Only visible on small screens) -->
+  <button id="menu-btn" class="lg:hidden text-2xl focus:outline-none cursor-pointer">
+    <i class="fa fa-solid fa-bars text-black h-5 w-5"></i>
+    <i id="x-icon" class="fa fa-solid fa-xmark hidden text-black w-5 h-5"></i>
+  </button>
+
+  <!-- Left side (Hidden on mobile, Flex on desktop) -->
+  <div class="hidden lg:flex items-center gap-4 flex-1">
+    <% if authenticated? %>
+      <%= link_to "New Artwork", new_artwork_path, class: "px-2 py-1 text-black font-bold hover:text-pink-700 transition" %>
+    <% end %>
+  </div>
+
+  <!-- Center Title (Always visible) -->
+  <h1 class="absolute left-1/2 -translate-x-1/2 text-black font-bold text-2xl md:text-4xl whitespace-nowrap">
+    EVA ARMENTA
+  </h1>
+
+  <!-- Right side (Hidden on mobile, Flex on desktop) -->
+  <div class="hidden lg:flex items-center justify-end gap-4 flex-1">
+    <%= form_with url: artworks_path, method: :get, class: "flex items-center gap-2" do |f| %>
+      <%= f.text_field :id, placeholder: "ID#...", class: "px-4 py-2 rounded-md border border-gray-300 w-24 focus:ring-2 focus:ring-pink-500", required: true, pattern: "\\d+" %>
+      <%= f.submit "Search", class: "cursor-pointer px-2 py-1 text-black font-bold hover:text-pink-700" %>
+    <% end %>
+
+    <% if authenticated? %>
+      <%= button_to "Sign Out", session_path, method: :delete, class: "px-2 py-1 text-black font-bold hover:text-pink-700" %>
+    <% else %>
+      <%= link_to "Sign In", new_session_path, class: "px-2 py-1 text-black font-bold hover:text-pink-700" %>
+    <% end %>
+    
+    <%= link_to "Home", root_path, class: "px-2 py-1 text-black font-bold hover:text-pink-700" %>
+  </div>
+</nav>
