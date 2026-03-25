@@ -6,12 +6,17 @@ services:
     env_file:
       - .env
     volumes:
-      - ./storage:/rails/storage
-      - ./db:/rails/db
+      # Change these two lines to use the named volumes
+      - rails_storage:/rails/storage
+      - rails_db:/rails/db
     restart: always
     deploy:
       resources:
         limits:
-          memory: 1024M # The "Hard" ceiling
+          memory: 1024M
         reservations:
-          memory: 512M # The "Soft" guarantee
+          memory: 512M
+
+volumes:
+  rails_storage:
+  rails_db:
