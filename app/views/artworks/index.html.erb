@@ -1,23 +1,24 @@
 <% content_for :title, "Artworks" %>
-<div class="w-full flex flex-col justify-start items-center gap-2">
+<div class="w-full flex flex-col justify-start items-center gap-2 relative xl:mt-13">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overflow-x-auto" id="notice"><%= notice %></p>
   <% end %>
-  <div class="flex justify-between items-center relative">
-    <h1 class="my-5 lg:my-0 left-1/2 translate-0 lg:translate-x-1/2 font-bold font-3xl lg:text-4xl fixed lg:top-40 lg:left-0 ml-0 lg:ml-4"><%= @current_category.presence || "All Artworks" %></h1>
-  </div>
-  <div id="artworks" class="min-w-80 divide-y divide-gray-200 space-y-5">
+  <h1 class="mt-2 block xl:fixed xl:top-32 xl:left-5 text-3xl font-bold"><%= @current_category.presence || "All Artworks" %></h1>
+  <div id="artworks" class="w-full grid grid-cols-1 gap-2 p-2 md:p-6">
     <% if @artworks.any? %>
       <% @artworks.each do |artwork| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <!-- Wrap the partial in a link_to block -->
-          <%= link_to artwork, class: "block w-full hover:opacity-90 transition-opacity" do %>
-            <%= render artwork %>
+        <div class="flex flex-col items-center mb-10 w-full h-fit divide-y devide-gray-500">
+          <%= link_to artwork, class: "bg-blue-50 group block w-full max-w-5xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
+            <% if artwork.images.attached? %>
+              <div class="bg-blue-500 w-[100%] w-full mx-auto flex justify-center items-center">
+                <%= image_tag artwork.images.first, class: "w-[100%] block h-auto object-contain shadow-sm" %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>
     <% else %>
-      <p class="text-center my-10">No artworks found.</p>
+      <p class="text-center my-10 font-bold">No artworks found.</p>
     <% end %>
   </div>
 </div>

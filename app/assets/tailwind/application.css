@@ -1,1 +1,4 @@
 @import "tailwindcss";
+
+/* Add this line so Tailwind sees your navbar classes */
+@source "../../views/**/*.{erb,haml,html,slim}";

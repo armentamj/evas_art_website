@@ -11,25 +11,23 @@
     </div>
   <% end %>
 
-  <div class="my-5 flex justify-between items-center">
+  <div class="my-5 flex justify-between items-center text-sm md:text-base">
     <%= form.label :user_id, "Select Artist" %>
     <%= form.collection_select :user_id, User.all, :id, :email_address, 
-        { prompt: "Choose a user" }, { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-4/10", {"border-gray-400": artwork.errors[:user].none?, "border-red-400": artwork.errors[:user].any?}] } %>
+        { prompt: "Choose a user" }, { class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-4/10", {"border-gray-400": artwork.errors[:user].none?, "border-red-400": artwork.errors[:user].any?}] } %>
   </div>
 
-  <div class="my-5">
+  <div class="my-5 text-sm md:text-base">
     <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:title].none?, "border-red-400 focus:outline-red-600": artwork.errors[:title].any?}] %>
+    <%= form.text_field :title, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:title].none?, "border-red-400 focus:outline-red-600": artwork.errors[:title].any?}] %>
   </div>
 
-  <div class="my-5">
+  <div class="my-5 text-sm md:text-base">
     <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:description].none?, "border-red-400 focus:outline-red-600": artwork.errors[:description].any?}] %>
+    <%= form.textarea :description, rows: 4, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:description].none?, "border-red-400 focus:outline-red-600": artwork.errors[:description].any?}] %>
   </div>
 
-  <div class="my-5 flex justify-between items-center">
-    <%= form.label :price %>
-    <%= form.text_field :price, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-4/10", {"border-gray-400 focus:outline-blue-600": artwork.errors[:price].none?, "border-red-400 focus:outline-red-600": artwork.errors[:price].any?}] %>
+  <div class="flex justify-between items-center text-sm md:text-base mt-4">
     <%= form.label :images %>
       <%# Preserve existing images on update — crucial to avoid deleting them %>
       <% if artwork.images.attached? %>
@@ -41,21 +39,21 @@
     <% end %>
     <%= form.file_field :images,
       multiple: true,
-      accept: "image/jpeg,image/png,image/webp,image/gif",
-      class: ["block w-4/10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-4 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mt-2",
+      accept: "image/jpeg,image/png,image/webp",
+      class: ["block w-4/10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-4 file:py-1.5  md:file:py-2.5 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mt-2",
       {"border-red-400": artwork.errors[:images].any?, "border-gray-300": artwork.errors[:images].none?}] %>
     <% if artwork.errors[:images].any? %>
-      <p class="mt-2 text-sm text-red-600"><%= artwork.errors[:images].to_sentence %></p>
+      <p class="mt-2 text-sm md:text-base text-sm text-red-600"><%= artwork.errors[:images].to_sentence %></p>
     <% end %>
     <%# Show previews of existing attached images %>
     <% if artwork.images.attached? %>
       <div class="mt-4">
         <p class="text-sm font-medium text-gray-700 mb-2">Current images:</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div class=" overflow-x-auto snap-x snap-mandatory scrollbar-hide">
           <% artwork.images.each do |image| %>
             <% if image.persisted? %>
-              <div class="relative rounded-lg overflow-hidden shadow-sm">
-                <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "w-full h-40 object-cover hover:scale-105 transition-transform duration-200" %>
+              <div class="relative rounded-lg object-cover shadow-sm w-20 h-10 scrollbar-hidden">
+                <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "my-2 snap-center w-full object-contain hover:scale-105 transition-transform duration-200" %>
               </div>
             <% end %>
         <% end %>
@@ -63,17 +61,19 @@
       </div>
     <% end %>
   </div>
-  <div class="my-5">
+  <div class="my-5 text-sm md:text-base flex justify-between items-start">
+    <%= form.label :price %>
+    <%= form.text_field :price, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-2/10", {"border-gray-400 focus:outline-blue-600": artwork.errors[:price].none?, "border-red-400 focus:outline-red-600": artwork.errors[:price].any?}] %>
     <%= form.label :category %>
     <%= form.select :category,
       options_for_select(
       Artwork::CATEGORIES.map { |cat| [cat, cat] },selected: artwork.category),{ prompt: "Select a category" },
-      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full",artwork.errors[:category].none? ? "border-gray-400 focus:outline-blue-600" :"border-red-400 focus:outline-red-600"] %>
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-4/10",artwork.errors[:category].none? ? "border-gray-400 focus:outline-blue-600" :"border-red-400 focus:outline-red-600"] %>
     <% if artwork.errors[:category].any? %>
       <p class="mt-1 text-sm text-red-600"><%= artwork.errors[:category].to_sentence %></p>
     <% end %>
   </div>
-  <div class="inline">
+  <div class="inline text-sm md:text-base">
     <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
