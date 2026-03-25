@@ -63,7 +63,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     # remember to sign up for postmark for eva's website
-    address:         "smtp.postmarkapp.com",
+    address:         "smtp.gmail.com",
     port:            587,
     domain:          "evaarmentaart.de",
     user_name:       ENV["SMTP_USERNAME"],

@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    volumes:
+      - ./storage:/rails/storage
+      - ./db:/rails/db
+    restart: always
