@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-controller="navbar" class="w-full flex flex-col justify-start items-center">
+<html class="w-full flex flex-col justify-start items-center">
   <head>
     <title><%= content_for(:title) || "Evas Art Website" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -25,7 +25,7 @@
   
     <%= javascript_importmap_tags %>
   </head>
-  <body data-navbar-target="bod" class="mt-20 lg:mt-30 w-full h-fit flex flex-col justify-start items-center">
+  <body class="mt-20 lg:mt-30 w-full h-fit flex flex-col justify-start items-center">
     <%= render 'layouts/navbar' %>
     <main class="h-fit w-full flex flex-col justify-start items-center px-2">
 

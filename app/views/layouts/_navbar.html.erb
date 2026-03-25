@@ -1,29 +1,42 @@
-<nav class="fixed top-0 left-0 min-h-20 h-fit lg:h-30 w-full p-6 flex flex-col justify-start items-center lg:flex-row lg:justify-between lg:items-end z-[2] border-b-1 bg-white transition-all duration-[500ms]">
-    <button data-action="click->navbar#toggle" class="block lg:hidden h-5 focus:outline-none cursor-pointer absolute top-3 left-5">
-        <p data-navbar-target="lineOne" class="font-bold origin-left block leading-none transition-all duration-[300ms]">____</p>
-        <p data-navbar-target="lineTwo" class="font-bold block leading-none">____</p>
-        <p data-navbar-target="lineThree" class="font-bold origin-left block leading-none transition-all duration-[300ms]">____</p>
+<nav data-controller="navbar" class="fixed top-0 left-0 min-h-20 h-fit lg:h-30 w-full p-6 flex flex-col justify-start items-center lg:flex-row lg:justify-between lg:items-end z-[2] border-b-1 bg-white transition-all duration-[500ms]">
+    <button data-action="click->navbar#toggle" class="block lg:hidden h-6 w-8 focus:outline-none cursor-pointer absolute top-6 left-5">
+        <div class="relative w-full h-full">
+            <%# Top Line %>
+            <p data-navbar-target="lineOne" class="h-1 rounded-sm bg-black Transform-GPU absolute top-0 left-0 w-full font-bold origin-center block leading-none transition-all duration-300 transform"></p>
+            
+            <%# Middle Line %>
+            <p data-navbar-target="lineTwo" class="h-1 rounded-sm bg-black Transform-GPU absolute top-3 left-0 w-full font-bold block leading-none transition-all duration-300"></p>
+            
+            <%# Bottom Line %>
+            <p data-navbar-target="lineThree" class="h-1 rounded-sm bg-black Transform-GPU absolute top-6 left-0 w-full font-bold origin-center block leading-none transition-all duration-300 transform"></p>
+        </div>
     </button>
     <!-- Left side are the auth-dependent links -->
     <div data-navbar-target="authen" class="hidden flex lg:flex flex-col lg-flex-row items-center transition-all duration-[300ms]">
         <% if authenticated? %>
-            <%= link_to "New Artwork", new_artwork_path, class: "bg-white px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+            <%= link_to t('new_artwork'), new_artwork_path, class: "bg-white px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <% end %>
     </div>
     <h1 data-navbar-target="eva" class="text-black absolute left-1/2 -translate-x-1/2 font-bold text-2xl md:text-4xl transition-all duration-[300ms]">EVA ARMENTA</h1>
     <!-- Right side - only visible from lg and up -->
     <div data-navbar-target="nonauthen" class="hidden flex lg:flex flex-col lg:flex-row items-center gap-4 transition-all duration-[300ms]">
+        <%= link_to t('home'), root_path, class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+        <% if authenticated? %>
+            <%= button_to t('sign_out'), session_path, method: :delete, class: " px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+        <% else %>
+            <%= button_to t('sign_in'), session_path, method: :delete, class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+        <% end %>
         <%= form_with url: artworks_path, method: :get, class: "flex items-center gap-2" do |f| %>
             <%= f.text_field :id, placeholder: "ID#...",
                 class: "px-4 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-900 h-5 md:h-auto w-20",
                 required: true, pattern: "\\d+" %>
-            <%= f.submit "Search", class: "px-2 py-1 text-black rounded-md hover:bg-pink-700 transition font-bold" %>
+            <%= f.submit t('search'), class: "px-2 py-1 text-black rounded-md hover:bg-pink-700 transition font-bold" %>
         <% end %>
-        <% if authenticated? %>
-            <%= button_to "Sign Out", session_path, method: :delete, class: " px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
-        <% else %>
-            <%= button_to "Sign In", session_path, method: :delete, class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+        <!-- i18n dynamic link -->
+        <% target_lang = I18n.locale == :de ? :en : :de %>
+        <%= link_to url_for(locale: target_lang), class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" do %>
+        <%= target_lang.to_s.upcase %>
         <% end %>
-    <%= link_to "Home", root_path, class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+        <%= link_to t('impressum'), impressum_path, class: "px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
     </div>
 </nav>

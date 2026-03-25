@@ -5,23 +5,34 @@
 
   <%= render @artwork %>
   <% 
-    # Prepare the email content using the @artwork instance variable
-    mail_subject = "Purchase Inquiry: #{@artwork.title} (ID: #{@artwork.id})"
-    mail_body = "Hello,\n\nI am interested in purchasing the following artwork:\n\n" \
-                "Name: #{@artwork.title}\n" \
-                "ID: #{@artwork.id}\n" \
-                "Price: $#{number_with_precision(@artwork.price, precision: 2)}\n\n" \
-                "Please send your PayPal information.\n\n" \
-                "Thank you!"
-                # URL encode the subject and body to prevent broken links
-                mail_params = { subject: mail_subject, body: mail_body }.to_query
+  # 1. Translate the Subject
+  mail_subject = t('inquiry.subject', title: @artwork.title, id: @artwork.id)
+
+  # 2. Build the Body using individual translated lines
+  # \n for line breaks in the mailto link
+  mail_body = [
+    t('inquiry.greeting'),
+    "",
+    t('inquiry.interest'),
+    "",
+    "#{t('inquiry.labels.name')}: #{@artwork.title}",
+    "#{t('inquiry.labels.id')}: #{@artwork.id}",
+    "#{t('inquiry.labels.price')}: #{number_to_currency(@artwork.price)}",
+    "",
+    t('inquiry.payment_request'),
+    "",
+    t('inquiry.closing')
+  ].join("\n")
+
+  # 3. URL encode
+  mail_params = { subject: mail_subject, body: mail_body }.to_query
   %>
   <div class="flex justify-end items-center absolute bottom-5 right-5 z-10">
-      <%= link_to "Purchase", "mailto:evaarmentaart@gmail.com?#{mail_params}", class: "border border-black/10 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
+      <%# <%= link_to t('purchase'), "mailto:evaarmentaart@gmail.com?#{mail_params}", class: "border border-black/10 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
 
     <% if authenticated? %>
-      <%= link_to "Edit", edit_artwork_path(@artwork), class: "border border-black/10 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
-      <%= button_to "Delete", @artwork, method: :delete, class: "border border-red-100 text-red-500 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white", data: { turbo_confirm: "Are you sure?" } %>
+      <%= link_to t('edit'), edit_artwork_path(@artwork), class: "border border-black/10 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white" %>
+      <%= button_to t('delete'), @artwork, method: :delete, class: "border border-red-100 text-red-500 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium  hover:text-white", data: { turbo_confirm: "Are you sure?" } %>
     <% end %>
   </div>
 </div>

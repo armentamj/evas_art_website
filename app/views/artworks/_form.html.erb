@@ -23,6 +23,14 @@
   </div>
 
   <div class="my-5 text-sm md:text-base">
+    <%= form.label :size, t('size') %>
+    <%= form.text_field :size, placeholder: "e.g. 50cm x 70cm", 
+        class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
+        {"border-gray-400 focus:outline-blue-600": artwork.errors[:size].none?, 
+        "border-red-400 focus:outline-red-600": artwork.errors[:size].any?}] %>
+  </div>
+
+  <div class="my-5 text-sm md:text-base">
     <%= form.label :description %>
     <%= form.textarea :description, rows: 4, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:description].none?, "border-red-400 focus:outline-red-600": artwork.errors[:description].any?}] %>
   </div>

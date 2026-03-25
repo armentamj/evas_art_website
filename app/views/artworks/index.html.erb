@@ -3,12 +3,12 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overflow-x-auto" id="notice"><%= notice %></p>
   <% end %>
-  <h1 class="mt-2 block xl:fixed xl:top-32 xl:left-5 text-3xl font-bold"><%= @current_category.presence || "All Artworks" %></h1>
+  <h1 class="mt-2 block xl:fixed xl:top-32 xl:left-5 text-3xl font-bold"><%= @current_category.present? ? t(to_snake_case(@current_category)) : t('all_paintings') %></h1>
   <div id="artworks" class="w-full grid grid-cols-1 gap-2 p-2 md:p-6">
     <% if @artworks.any? %>
       <% @artworks.each do |artwork| %>
         <div class="flex flex-col items-center mb-10 w-full h-fit divide-y devide-gray-500">
-          <%= link_to artwork, class: "bg-blue-50 group block w-full max-w-5xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
+          <%= link_to artwork, class: "bg-blue-50 group block w-full max-w-3xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
             <% if artwork.images.attached? %>
               <div class="bg-blue-500 w-[100%] w-full mx-auto flex justify-center items-center">
                 <%= image_tag artwork.images.first, class: "w-[100%] block h-auto object-contain shadow-sm" %>
@@ -18,7 +18,7 @@
         </div>
       <% end %>
     <% else %>
-      <p class="text-center my-10 font-bold">No artworks found.</p>
+      <p class="text-4xl text-center my-10 font-bold"><%= t('no_artwork_found') %></p>
     <% end %>
   </div>
 </div>

@@ -1,31 +1,39 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  eva_armenta_art: "Eva Armenta Art"
+  new_artwork: "New Artwork"
+  sign_out: "Sign Out"
+  sign_in: "Sign In"
+  search: "Search"
+  switch_to: "Switch to English"
+  home: "Home"
+  saying: "Modern, colorful, and bold abstract art and flowers."
+  abstract_paintings: "Abstract Paintings"
+  flowers_and_still_lifes: "Flowers and Still Lifes"
+  tiny_art: "Tiny Art"
+  delete: "Delete"
+  purchase: "Purchase"
+  edit: "Edit"
+  size: "Size"
+  category_is_empty: "Category Is Empty"
+  no_artwork_found: "No Artwork Found."
+  all_paintings: "All Paintings"
+  subject: "Purchase Inquiry: %{title} (ID: %{id})"
+  greeting: "Hello,"
+  interest: "I am interested in purchasing the following artwork:"
+  name: "Name"
+  id: "ID"
+  price: "Price"
+  payment_request: "Please send your PayPal information."
+  closing: "Thank you!"
+  impressum_title: "Legal Notice (Impressum)"
+  impressum_section_info: "Information according to § 5 DDG"
+  impressum_owner: "Represented by"
+  impressum_address: "Post Address"
+  impressum_contact: "Contact"
+  impressum_email: "Email"
+  impressum_phone: "Phone"
+  impressum_vat_id: "VAT ID"
+  impressum: "Impressum"
+  impressum_disclaimer_title: "Copyright Notice"
+  impressum_disclaimer_text: "All content and works on these pages, especially the displayed artworks, are protected by copyright. Any reproduction, processing, distribution, or any kind of exploitation outside the limits of copyright law requires the prior written consent of the artist."
+  id_number: "ID Nr."

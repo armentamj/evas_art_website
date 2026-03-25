@@ -40,6 +40,10 @@ gem "thruster", require: false
 # Adding Tailwind to Rails
 gem "tailwindcss-rails"
 
+# For internationalization
+gem "rails-i18n", "~> 8.0"
+
+
 # Adding gem for verification because the verification is not included on active storage
 gem "active_storage_validations"
 
