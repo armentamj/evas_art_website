@@ -11,7 +11,7 @@
         <% if @abstract_paintings_first&.images&.attached? %>
           <%= image_tag @abstract_paintings_first.images.first.variant(resize_to_limit: [1200, nil]),
                         alt: t('abstract_painting'),
-                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-150" %>
+                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
           <div class="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
             <p class="text-gray-600 text-2xl text-center px-6"><%= t('category_is_empty') %></p>
@@ -29,7 +29,7 @@
         <% if @flowers_and_still_lifes_first&.images&.attached? %>
           <%= image_tag @flowers_and_still_lifes_first.images.first.variant(resize_to_limit: [1200, nil]),
                         alt: t('flowers_and_still_lifes'),
-                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-150" %>
+                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
           <div class="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
             <p class="text-gray-600 text-2xl text-center px-6"><%= t('category_is_empty') %></p>
@@ -47,7 +47,7 @@
         <% if @tiny_art_first&.images&.attached? %>
           <%= image_tag @tiny_art_first.images.first.variant(resize_to_limit: [1200, nil]),
                         alt: t('tiny_art'),
-                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-150" %>
+                        class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
           <div class="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
             <p class="text-gray-600 text-2xl text-center px-6"><%= t('category_is_empty') %></p>
