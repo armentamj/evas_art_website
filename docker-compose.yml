@@ -14,8 +14,8 @@ services:
     networks:
       - proxy
     restart: always
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
     deploy:
       # The app will have a minimum of 512mb ram and a max of 1024mb
       resources:
