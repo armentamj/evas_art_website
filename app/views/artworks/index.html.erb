@@ -3,7 +3,7 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overflow-x-auto" id="notice"><%= notice %></p>
   <% end %>
-  <h1 class="mt-2 block xl:fixed xl:top-32 xl:left-5 text-3xl font-bold"><%= @current_category.present? ? t(to_snake_case(@current_category)) : t('all_paintings') %></h1>
+  <h1 class="mt-2 block xl:fixed xl:top-30 xl:left-5 text-3xl font-bold"><%= @current_category.present? ? t(to_snake_case(@current_category)) : t('all_paintings') %></h1>
   <div id="artworks" class="w-full grid grid-cols-1 gap-2 p-2 md:p-6">
     <% if @artworks.any? %>
       <% @artworks.each do |artwork| %>

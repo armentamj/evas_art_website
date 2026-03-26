@@ -10,15 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('favicon.png'), rel: 'icon', type: 'image/png' %>
+
 
     
     <%= yield :head %>
 
     <%# Enable PWA manifest ... (keep or comment as-is) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
 
     <!-- Tailwind here -->
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>

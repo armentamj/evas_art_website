@@ -1,16 +1,18 @@
 services:
   web:
     build: .
+    # Port 80 is being used for another service on the server
     ports:
       - "3000:80"
     env_file:
       - .env
     volumes:
-      # Change these two lines to use the named volumes
+      # Named Volumes
       - rails_storage:/rails/storage
       - rails_db:/rails/db
     restart: always
     deploy:
+      # The app will have a minimum of 512mb ram and a max of 1024mb
       resources:
         limits:
           memory: 1024M
