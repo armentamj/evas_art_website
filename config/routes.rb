@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|de/ do
     root to: "home#index"
     get "impressum", to: "pages#impressum", as: :impressum
+    get "contact", to: "pages#contact", as: :contact
     get "up" => "rails/health#show", as: :rails_health_check
 
     resource :session, only: [ :new, :create, :destroy ]

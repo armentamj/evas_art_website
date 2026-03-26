@@ -11,17 +11,17 @@
   # 2. Build the Body using individual translated lines
   # \n for line breaks in the mailto link
   mail_body = [
-    t('inquiry.greeting'),
+    t('greeting'),
     "",
-    t('inquiry.interest'),
+    t('interest'),
     "",
-    "#{t('inquiry.labels.name')}: #{@artwork.title}",
-    "#{t('inquiry.labels.id')}: #{@artwork.id}",
-    "#{t('inquiry.labels.price')}: #{number_to_currency(@artwork.price)}",
+    "#{t('.name')}: #{@artwork.title}",
+    "#{t('id')}: #{@artwork.id}",
+    "#{t('price')}: #{number_to_currency(@artwork.price)}",
     "",
-    t('inquiry.payment_request'),
+    t('payment_request'),
     "",
-    t('inquiry.closing')
+    t('closing')
   ].join("\n")
 
   # 3. URL encode

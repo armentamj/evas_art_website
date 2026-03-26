@@ -39,3 +39,8 @@ de:
   id_number: "ID Nr."
   instagram: "Eva auf Instagram folgen"
   pinterest: "Eva auf Pinterest folgen"
+  contact: "Kontakt"
+  instruction: "Schreiben Sie Eva eine E-Mail an %{email}"
+  subject_label: "Betreff"
+  message_label: "Nachricht"
+  submit_button: "E-Mail senden"
