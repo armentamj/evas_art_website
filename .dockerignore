@@ -50,3 +50,5 @@
 /.dockerignore
 /Dockerfile*
 /docker-compose.yml
+/deploy.sh
+/README.md
