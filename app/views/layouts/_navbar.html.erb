@@ -19,7 +19,7 @@
         <!-- i18n dynamic link -->
         <% target_lang = I18n.locale == :de ? :en : :de %>
         <%= link_to url_for(locale: target_lang), class: "hover:text-white mb-4 lg:mb-0 border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" do %>
-        <%= target_lang.to_s.upcase %>
+            <%= target_lang == :en ? "English" : "Deutsch" %>
         <% end %>
         <%= link_to t('home'), root_path, class: "hover:text-white mb-4 md:mb-0 border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <%= link_to t('contact'), contact_path, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>

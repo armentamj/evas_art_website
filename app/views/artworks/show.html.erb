@@ -6,7 +6,7 @@
   <%= render @artwork %>
   <% 
   # 1. Translate the Subject
-  mail_subject = t('inquiry.subject', title: @artwork.title, id: @artwork.id)
+  mail_subject = t('subject', title: @artwork.title, id: @artwork.id)
 
   # 2. Build the Body using individual translated lines
   # \n for line breaks in the mailto link
@@ -15,7 +15,7 @@
     "",
     t('interest'),
     "",
-    "#{t('.name')}: #{@artwork.title}",
+    "#{t('name')}: #{@artwork.title}",
     "#{t('id')}: #{@artwork.id}",
     "#{t('price')}: #{number_to_currency(@artwork.price)}",
     "",
