@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :passwords, param: :token, only: [ :new, :create, :edit, :update ]
 
     resources :artworks
-    get "/:slug", to: "artworks#index", as: :category
+    get "/:slug", to: "artworks#index", as: :category,
+    constraints: { slug: /abstract-paintings|flowers-and-still-lifes|tiny-art/ }
   end
 end
