@@ -127,6 +127,8 @@ GEM
     ffi (1.17.3-x86_64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
     ffi (1.17.3-x86_64-linux-musl)
+    friendly_id (5.6.0)
+      activerecord (>= 4.0.0)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -187,6 +189,8 @@ GEM
     matrix (0.4.3)
     mcp (0.8.0)
       json-schema (>= 4.1)
+    meta-tags (2.23.0)
+      actionpack (>= 6.0.0)
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
@@ -432,11 +436,13 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  friendly_id (~> 5.6)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   kamal
   letter_opener
+  meta-tags (~> 2.23)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)

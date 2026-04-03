@@ -1,4 +1,7 @@
 class Artwork < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   CATEGORIES = [
   "Abstract Paintings",
   "Flowers and Still Lifes",
