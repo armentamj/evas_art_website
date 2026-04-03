@@ -67,9 +67,6 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
 
-  # 1. Sets the 'host' so Rails can build the reset link URLs (http://localhost:3000)
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-
   # 2. Use 'letter_opener' to see emails in your browser instead of a real inbox
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true

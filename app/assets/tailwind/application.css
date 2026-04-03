@@ -1,4 +1,24 @@
 @import "tailwindcss";
 
-/* Add this line so Tailwind sees your navbar classes */
+@theme {
+    /* This tells Tailwind that 'font-sans' should be Maven Pro */
+    --font-sans: "Maven Pro", ui-sans-serif, system-ui, sans-serif;
+}
+
 @source "../../views/**/*.{erb,haml,html,slim}";
+
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: font-url('maven-pro-v40-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Maven Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: font-url('maven-pro-v40-latin-900.woff2') format('woff2');
+}

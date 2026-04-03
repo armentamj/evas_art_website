@@ -5,11 +5,13 @@
   <p><strong><%= t('impressum_owner') %>:</strong> Eva Armenta</p>
 
   <h2 class="text-xl font-semibold mt-8 mb-4"><%= t('impressum_contact') %></h2>
-  <p><strong><%= t('impressum_email') %>:</strong>evaarmentaart@gmail.de</p>
+  <p><strong><%= t('impressum_email') %>: </strong>evaarmentaart@gmail.de</p>
 
   <h2 class="text-xl font-semibold mt-8 mb-2"><%= t('impressum_disclaimer_title') %></h2>
   <p class="text-sm text-gray-600 italic"><%= t('impressum_disclaimer_text') %></p>
-  <div class="absolute bottom-5 lg:bottom-20 left-1/2 -translate-x-1/2 w-fit flex justify-between items-center gap-8">
+  <p class="text-sm text-gray-600 italic"><%= t('impressum_owner') %> Eva Armenta</p>
+  <p class="text-sm text-gray-600 italic"><%= t('impressum_web_design') %></p>
+<div class="absolute bottom-5 lg:bottom-20 left-1/2 -translate-x-1/2 w-fit flex justify-between items-center gap-8">
     <%# Instagram %>
     <%= link_to "https://www.instagram.com/eva_armenta_art/", target: "_blank", rel: "noopener" do %>
       <svg viewBox="0 0 24 24" class="w-12 h-12 fill-pink-600 hover:fill-pink-800 transition-colors">

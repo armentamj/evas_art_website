@@ -35,40 +35,58 @@
     <%= form.textarea :description, rows: 4, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": artwork.errors[:description].none?, "border-red-400 focus:outline-red-600": artwork.errors[:description].any?}] %>
   </div>
 
+<div data-controller="image-preview">
+  
   <div class="flex justify-between items-center text-sm md:text-base mt-4">
     <%= form.label :images %>
-      <%# Preserve existing images on update — crucial to avoid deleting them %>
+    <%# 2. Add the Target and the Action to the file field %>
+    <%= form.file_field :images,
+      multiple: true,
+      include_hidden: false,
+      accept: "image/jpeg,image/png,image/webp",
+      data: { 
+        image_preview_target: "input", 
+        action: "change->image-preview#show" 
+      },
+      class: "block w-4/10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-4 file:py-1.5 md:file:py-2.5 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mt-2" %>
+  </div>
+
+  <%# Previews of existing and NEW images %>
+  <div class="mt-4">
+    <p class="text-sm font-medium text-gray-700 mb-2">Current images:</p>
+    <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-2">
+      
+      <%# Render existing images %>
       <% if artwork.images.attached? %>
         <% artwork.images.each do |image| %>
           <% if image.persisted? %>
-            <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+            <div id="<%= dom_id(image) %>" class="relative flex-none rounded-lg object-cover shadow-sm w-24 h-24 snap-center border bg-gray-100">
+              <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "w-full h-full object-contain" %>
+              <%= link_to delete_image_artwork_path(artwork, image_id: image.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                  class: "absolute -top-1 -right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow" do %>
+                  &times;
+              <% end %>
+              <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+            </div>
           <% end %>
         <% end %>
-    <% end %>
-    <%= form.file_field :images,
-      multiple: true,
-      accept: "image/jpeg,image/png,image/webp",
-      class: ["block w-4/10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none file:mr-4 file:py-1.5  md:file:py-2.5 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mt-2",
-      {"border-red-400": artwork.errors[:images].any?, "border-gray-300": artwork.errors[:images].none?}] %>
-    <% if artwork.errors[:images].any? %>
-      <p class="mt-2 text-sm md:text-base text-sm text-red-600"><%= artwork.errors[:images].to_sentence %></p>
-    <% end %>
-    <%# Show previews of existing attached images %>
-    <% if artwork.images.attached? %>
-      <div class="mt-4">
-        <p class="text-sm font-medium text-gray-700 mb-2">Current images:</p>
-        <div class=" overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          <% artwork.images.each do |image| %>
-            <% if image.persisted? %>
-              <div class="relative rounded-lg object-cover shadow-sm w-20 h-10 scrollbar-hidden">
-                <%= image_tag image.variant(resize_to_limit: [400, 400]), class: "my-2 snap-center w-full object-contain hover:scale-105 transition-transform duration-200" %>
-              </div>
-            <% end %>
-        <% end %>
-        </div>
+      <% end %>
+
+      <%# 3. Added this empty DIV for the Stimulus controller to inject new previews into %>
+      <div data-image-preview-target="preview" class="flex gap-2"></div>
+        
       </div>
-    <% end %>
+    </div>
   </div>
+
+<%# Move the "Add" button OUTSIDE the if-attached block so it always shows %>
+<div class="mt-6">
+  <%= form.label :images, "Add More Images", class: "block text-sm font-medium text-gray-700" %>
+  <%= form.file_field :images, multiple: true, accept: "image/*", class: "mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
+</div>
+
+<div class="my-5 text-sm md:text-base flex justify-between items-start">
+
   <div class="my-5 text-sm md:text-base flex justify-between items-start">
     <%= form.label :price %>
     <%= form.text_field :price, class: ["block text-sm md:text-base shadow-sm rounded-md border px-3 py-2 mt-2 w-2/10", {"border-gray-400 focus:outline-blue-600": artwork.errors[:price].none?, "border-red-400 focus:outline-red-600": artwork.errors[:price].any?}] %>

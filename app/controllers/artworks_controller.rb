@@ -31,6 +31,16 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:image_id])
+    @image.purge
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(helpers.dom_id(@image)) }
+      format.html { redirect_back fallback_location: edit_artwork_path(@image.record) }
+    end
+  end
+
   # GET /artworks/1
   def show
   end
