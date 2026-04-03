@@ -8,7 +8,7 @@
     <% if @artworks.any? %>
       <% @artworks.each do |artwork| %>
         <div class="flex flex-col items-center mb-10 w-full h-fit divide-y devide-gray-500">
-          <%= link_to artwork, class: "bg-blue-50 group block w-full max-w-3xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
+          <%= link_to artwork, alt: "#{artwork.title}: #{artwork.description}", title: "#{artwork.title}", class: "bg-blue-50 group block w-full max-w-3xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
             <% if artwork.images.attached? %>
               <div class="bg-blue-500 w-[100%] w-full mx-auto flex justify-center items-center">
                 <%= image_tag artwork.images.first, class: "w-[100%] block h-auto object-contain shadow-sm" %>
