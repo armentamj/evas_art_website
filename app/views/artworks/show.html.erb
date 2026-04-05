@@ -7,13 +7,13 @@
 
   <div class="flex justify-end items-center absolute bottom-5 right-5 z-10">
     <!-- Purchase button that autofills the email feilds -->
-    <%= mail_to "evaarmentaart@gmail.com", t('purchase'), subject: "#{t('greeting')} - #{@artwork.title}",
+    <%= mail_to "evaarmentaart@gmail.com", t('purchase'), subject: "{t('subject')}",
       body: "#{t('greeting')}\n\n" \
             "#{t('interest')}\n" \
             "#{t('name')}: #{@artwork.title}\n" \
             "#{t('id')}: #{@artwork.id}\n" \
             "#{t('price')}: #{number_to_currency(@artwork.price)}\n\n" \
-            "#{t('payment_request')}\n\n" \
+            "***#{t('payment_request').upcase}***\n\n" \
             "#{t('closing')}",
             class: "border border-black/10 mx-1 w-fit text-center rounded-md px-2 py-1 hover:bg-pink-500 inline-block shadow-lg bg-white font-medium hover:text-white"
             %>
