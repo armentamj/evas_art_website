@@ -17,7 +17,7 @@ de:
   category_is_empty: "Die Kategorie ist leer"
   no_artwork_found: "Keine Kunstwerke gefunden."
   all_paintings: "Alle Gemälde"
-  subject: "Kaufanfrage für das Kunstwerk %{title}. (ID: %{id})"
+  subject: "Kaufanfrage für das Kunstwerk"
   greeting: "Hallo,"
   interest: "Ich interessiere mich für den Kauf des folgenden Kunstwerks:"
   name: "Name"

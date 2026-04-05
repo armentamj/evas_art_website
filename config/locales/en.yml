@@ -17,7 +17,7 @@ en:
   category_is_empty: "Category Is Empty"
   no_artwork_found: "No Artwork Found."
   all_paintings: "All Paintings"
-  subject: "Purchase Inquiry for the artwork %{title}. (ID: %{id})"
+  subject: "Purchase Inquiry for the artwork"
   greeting: "Hello,"
   interest: "I am interested in purchasing the following artwork:"
   name: "Name"
