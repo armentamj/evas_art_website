@@ -12,9 +12,12 @@
         </div>
     </button>
     <!-- Left side are the auth-dependent links -->
-    <div data-navbar-target="authen" class="mb-4 lg:mb-0 hidden flex lg:flex flex-col lg:flex-row items-center transition-all duration-[300ms]">
-        <% if authenticated? %>
-            <%= link_to t('new_artwork'), new_artwork_path, class: "hover:text-white mb-4 lg:mb-0 border border-black/10 lg:border-none bg-white px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
+    <div data-navbar-target="authen" class="mb-2 lg:mb-0 hidden flex lg:flex flex-col lg:flex-row items-center transition-all duration-[300ms]">
+        <%= form_with url: artworks_path, method: :get, class: "flex items-center gap-1 px-2 mb-4" do |f| %>
+            <%= f.text_field :id, placeholder: "ID#...",
+                class: "px-4 py-4 md:py-0 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-900 h-5 w-15",
+                required: true, pattern: "\\d+" %>
+            <%= f.submit t('search'), class: "hover:text-white border border-black/10 lg:border-none py-1 px-2 text-black rounded-md hover:bg-pink-700 transition font-bold" %>
         <% end %>
         <!-- i18n dynamic link -->
         <% target_lang = I18n.locale == :de ? :en : :de %>
@@ -24,7 +27,7 @@
         <%= link_to t('home'), root_path, class: "hover:text-white mb-4 md:mb-0 border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <%= link_to t('contact'), contact_path, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
     </div>
-    <h1 data-navbar-target="eva" class="text-black absolute left-1/2 -translate-x-1/2 font-bold text-2xl md:text-4xl transition-all duration-[300ms]">EVA ARMENTA</h1>
+    <h1 data-navbar-target="eva" class="text-black absolute left-1/2 -translate-x-1/2 font-bold text-2xl md:text-[32px] transition-all duration-[300ms]">EVA ARMENTA</h1>
     <!-- Right side - only visible from lg and up -->
     <div data-navbar-target="nonauthen" class="lg:gap-2 hidden flex lg:flex flex-col lg:flex-row items-center gap-4 transition-all duration-[300ms]">
         <% if authenticated? %>
@@ -32,11 +35,8 @@
         <% else %>
             <%= button_to t('sign_in'), session_path, method: :delete, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <% end %>
-        <%= form_with url: artworks_path, method: :get, class: "flex items-center gap-1 px-2" do |f| %>
-            <%= f.text_field :id, placeholder: "ID#...",
-                class: "px-4 py-4 md:py-0 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-900 h-5 w-20",
-                required: true, pattern: "\\d+" %>
-            <%= f.submit t('search'), class: "hover:text-white border border-black/10 lg:border-none py-1 px-2 text-black rounded-md hover:bg-pink-700 transition font-bold" %>
+        <% if authenticated? %>
+            <%= link_to t('new_artwork'), new_artwork_path, class: "hover:text-white  lg:mb-0 border border-black/10 lg:border-none bg-white px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <% end %>
         <%= link_to t('impressum'), impressum_path, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
     </div>
