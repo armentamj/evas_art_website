@@ -6,21 +6,27 @@
   <%= render @artwork %>
 
   <% 
-    # Prepare the email body lines using your YAML keys
-  full_body = [
-    t('greeting'),
-    t('interest'),
-    "#{t('name')}: #{@artwork.title}",
-    "#{t('id')}: #{@artwork.id}",
-    "#{t('price')}: #{number_to_currency(@artwork.price)}",
-    t('payment_request'),
-    t('closing')
-  ].join("\r\n")
+    # 1. Build the array of body lines
+    mail_body_lines = [
+      t('greeting'),
+      "",
+      t('interest'),
+      "",
+      "#{t('name')}: #{@artwork.title}",
+      "#{t('id')}: #{@artwork.id}",
+      "#{t('price')}: #{number_to_currency(@artwork.price)}",
+      "",
+      t('payment_request'),
+      "",
+      t('closing')
+    ]
 
-    # Encode for mailto (ensuring spaces are %20 and not +)
-    subject_encoded = ERB::Util.url_encode(t('subject'), title: @artwork.title, id: @artwork.id)
-    body_encoded    = ERB::Util.url_encode(mail_body_lines.join("\r\n"))
+    # 2. Join lines with \r\n and encode for the URL
+    # Using 'u()' is a standard Rails shortcut for ERB::Util.url_encode
+    subject_encoded = u(t('subject', title: @artwork.title, id: @artwork.id))
+    body_encoded    = u(mail_body_lines.join("\r\n"))
 
+    # 3. Construct the mailto link correctly
     mail_url = "mailto:evaarmentaart@://gmail.com{subject_encoded}&body=#{body_encoded}"
   %>
 
@@ -33,4 +39,3 @@
     <% end %>
   </div>
 </div>
-
