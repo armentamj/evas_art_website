@@ -7,7 +7,7 @@
 
   <div class="flex justify-end items-center absolute bottom-5 right-5 z-10">
     <!-- Purchase button that autofills the email feilds -->
-    <%= mail_to "evaarmentaart@gmail.com", t('purchase'), subject: "#{t('subject')}",
+    <%= mail_to "evaarmentaart@gmail.com", t('purchase'), subject: "t('subject')",
       body: "#{t('greeting')}\n\n" \
             "#{t('interest')}\n" \
             "#{t('name')}: #{@artwork.title}\n" \
