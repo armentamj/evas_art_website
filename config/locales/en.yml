@@ -31,6 +31,7 @@ en:
   impressum_address: "Post Address"
   impressum_contact: "Contact"
   impressum_email: "Email"
+  impressum_atelieradresse: "Studio Address"
   impressum_phone: "Phone"
   impressum_vat_id: "VAT ID"
   impressum: "Impressum"

@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html class="w-full flex flex-col justify-start items-center">
   <head>
-    <%= display_meta_tags site: 'Eva Armenta Art', reverse: true %>
+    <%# --- SEO & Social Meta Tags --- %>
+    <%= display_meta_tags(
+      site: 'Eva Armenta Art',
+      title: 'Modern Abstract & Floral Paintings',
+      reverse: true,
+      separator: '|',
+      description: 'Original modern abstract and floral paintings by Eva Armenta. Based in Lübeck, Germany.',
+      canonical: request.original_url,
+      og: {
+        site_name: 'Eva Armenta Art',
+        title: :title,
+        description: :description,
+        type: 'website',
+        url: request.original_url,
+        image: image_url('social-preview.jpg') # Create a 1200x630px image in app/assets/images
+      }
+    ) %>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('favicon.png'), rel: 'icon', type: 'image/png' %>
-
-
     
     <%= yield :head %>
 
-    <%# Enable PWA manifest ... (keep or comment as-is) %>
-
     <!-- Tailwind here -->
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-  
     <%= javascript_importmap_tags %>
   </head>
   <body class="mt-20 lg:mt-30 w-full h-fit flex flex-col justify-start items-center">
     <%= render 'layouts/navbar' %>
     <main class="h-fit w-full flex flex-col justify-start items-center px-2">
-
       <%= yield %>
     </main>
   </body>
