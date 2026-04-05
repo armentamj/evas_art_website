@@ -7,22 +7,18 @@
 
   <% 
     # Prepare the email body lines using your YAML keys
-    mail_body_lines = [
-      t('greeting'),
-      "",
-      t('interest'),
-      "",
-      "#{t('name')}: #{@artwork.title}",
-      "#{t('id')}: #{@artwork.id}",
-      "#{t('price')}: #{number_to_currency(@artwork.price)}",
-      "",
-      t('payment_request'),
-      "",
-      t('closing')
-    ]
+  full_body = [
+    t('greeting'),
+    t('interest'),
+    "#{t('name')}: #{@artwork.title}",
+    "#{t('id')}: #{@artwork.id}",
+    "#{t('price')}: #{number_to_currency(@artwork.price)}",
+    t('payment_request'),
+    t('closing')
+  ].join("\r\n")
 
     # Encode for mailto (ensuring spaces are %20 and not +)
-    subject_encoded = ERB::Util.url_encode(t('subject', title: @artwork.title, id: @artwork.id))
+    subject_encoded = ERB::Util.url_encode(t('subject'), title: @artwork.title, id: @artwork.id)
     body_encoded    = ERB::Util.url_encode(mail_body_lines.join("\r\n"))
 
     mail_url = "mailto:evaarmentaart@://gmail.com{subject_encoded}&body=#{body_encoded}"
