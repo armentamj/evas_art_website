@@ -1,1 +1,18 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Block private admin and session paths from search results
+Disallow: /en/session
+Disallow: /de/session
+Disallow: /en/users/*/edit   # Blocks editing any user profile
+Disallow: /de/users/*/edit
+Disallow: /en/artworks/new   # Block making a new user profile
+Disallow: /de/artworks/new
+Disallow: /en/artworks/*/edit # Blocks editing any artwork
+Disallow: /de/artworks/*/edit
+
+# Link to your sitemap once you create it
+# Sitemap: https://yourdomain.com
+
