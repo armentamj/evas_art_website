@@ -33,7 +33,7 @@
         <% if authenticated? %>
             <%= button_to t('sign_out'), session_path, method: :delete, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
         <% else %>
-            <%= button_to t('sign_in'), session_path, method: :delete, class: "hover:text-white border border-black/10 lg:border-none px-2 py-1 text-white transition font-bold rounded-md hover:bg-pink-700" %>
+            <%= button_to t('sign_in'), session_path, method: :delete, class: "hover:text-white px-2 py-1 text-white transition font-bold rounded-md hover:bg-pink-700" %>
         <% end %>
         <% if authenticated? %>
             <%= link_to t('new_artwork'), new_artwork_path, class: "hover:text-white  lg:mb-0 border border-black/10 lg:border-none bg-white px-2 py-1 text-black transition font-bold rounded-md hover:bg-pink-700" %>
