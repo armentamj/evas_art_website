@@ -3,14 +3,17 @@
 User-agent: *
 Allow: /
 
-# Block private admin and session paths from search results
 Disallow: /en/session
 Disallow: /de/session
-Disallow: /en/users/*/edit   # Blocks editing any user profile
+Disallow: /en/passwords/new    # The "Forgot Password" page
+Disallow: /de/passwords/new
+Disallow: /en/passwords/*/edit # The "Reset Password" link from your email
+Disallow: /de/passwords/*/edit
+Disallow: /en/users/*/edit
 Disallow: /de/users/*/edit
-Disallow: /en/artworks/new   # Block making a new user profile
+Disallow: /en/artworks/new
 Disallow: /de/artworks/new
-Disallow: /en/artworks/*/edit # Blocks editing any artwork
+Disallow: /en/artworks/*/edit
 Disallow: /de/artworks/*/edit
 
 # Link to your sitemap once you create it
