@@ -11,7 +11,7 @@
           <%= link_to artwork, alt: "#{artwork.title}: #{artwork.description}", title: "#{artwork.title}", class: "bg-blue-50 group block w-full max-w-3xl p-6 rounded-xl shadow-lg hover:opacity-95 transition-opacity" do %>
             <% if artwork.images.attached? %>
               <div class="bg-blue-500 w-[100%] w-full mx-auto flex justify-center items-center">
-                <%= image_tag artwork.images.first, class: "w-[100%] block h-auto object-contain shadow-sm" %>
+                <%= image_tag artwork.images.first.variant(resize_to_limit: [800, 800], format: :webp, saver: { quality: 80, strip: true }), class: "w-[100%] block h-auto object-contain shadow-sm" %>
               </div>
             <% end %>
           <% end %>
