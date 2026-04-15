@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <% if @hero_image_url %>
+    <link rel="preload" as="image" href="<%= @hero_image_url %>" fetchpriority="high">
+  <% end %>
+<% end %>
+
 <div class="w-full text-center flex flex-col justify-start items-center min-h-full">
   <div class="w-full flex flex-col justify-start items-center px-4">
     <h1 class="text-[clamp(24px,8vw,96px)] mt-4 lg:mt-20 font-semi-bold">EVA ARMENTA ART</h1>
@@ -9,7 +15,7 @@
     <div class="w-full max-w-[70%] aspect-[1/1] border border-black-500 overflow-hidden rounded-lg shadow-lg relative">
       <%= link_to category_path("abstract-paintings") , class: "block w-full h-full" do %>
         <% if @abstract_paintings_first&.images&.attached? %>
-          <%= image_tag @abstract_paintings_first.images.first.variant(resize_to_limit: [1200, nil]),
+          <%= image_tag @abstract_paintings_first.images.first.variant(resize_to_limit: [800, 800], format: :webp, saver: { quality: 80, strip: true }),
                         alt: t('abstract_painting'),
                         class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
@@ -27,8 +33,8 @@
     <div class="w-full max-w-[70%] aspect-[1/1] border border-black-500 overflow-hidden rounded-lg shadow-lg relative">
       <%= link_to category_path("flowers-and-still-lifes"), class: "block w-full h-full" do %>
         <% if @flowers_and_still_lifes_first&.images&.attached? %>
-          <%= image_tag @flowers_and_still_lifes_first.images.first.variant(resize_to_limit: [1200, nil]),
-                        alt: t('flowers_and_still_lifes'),
+          <%= image_tag @flowers_and_still_lifes_first.images.first.variant(resize_to_limit: [800, 800], format: :webp, saver: { quality: 80, strip: true }),
+                        loading: "lazy", alt: t('flowers_and_still_lifes'),
                         class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
           <div class="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
@@ -45,8 +51,8 @@
     <div class="w-full max-w-[70%] aspect-[1/1] border border-black-500 overflow-hidden rounded-lg shadow-lg relative">
       <%= link_to category_path("tiny-art"), class: "block w-full h-full" do %>
         <% if @tiny_art_first&.images&.attached? %>
-          <%= image_tag @tiny_art_first.images.first.variant(resize_to_limit: [1200, nil]),
-                        alt: t('tiny_art'),
+          <%= image_tag @tiny_art_first.images.first.variant(resize_to_limit: [800, 800], format: :webp, saver: { quality: 80, strip: true }),
+                        loading: "lazy", alt: t('tiny_art'),
                         class: "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-165" %>
         <% else %>
           <div class="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
