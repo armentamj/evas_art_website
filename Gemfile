@@ -77,4 +77,4 @@ end
 
 gem "meta-tags", "~> 2.23"
 
-gem "friendly_id", "~> 5.6"
+gem "friendly_id", "~> 5.7"
