@@ -40,11 +40,11 @@
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('favicon.png'), rel: 'icon', type: 'image/png' %>
     
-    <%= yield :head %>
 
     <!-- Tailwind here -->
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= yield :head %>
   </head>
   <body class="mt-20 lg:mt-30 w-full h-fit flex flex-col justify-start items-center">
     <%= render 'layouts/navbar' %>

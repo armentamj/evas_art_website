@@ -18,7 +18,9 @@ class HomeController < ApplicationController
       }
 
       # This generates the specific URL for the browser to preload
-      @hero_image_url = url_for(@abstract_paintings_first.images.first.variant(variant_settings))
+      @hero_image_url_one = url_for(@abstract_paintings_first.images.first.variant(variant_settings))
+      @hero_image_url_two = url_for(@flowers_and_still_lifes_first.images.first.variant(variant_settings))
+      @hero_Image_url_three = url_for(@tiny_art_first.images.first.variant(variant_settings))
     end
   end
 end
