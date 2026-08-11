@@ -15,7 +15,7 @@
         artwork_email_email_value: "evaarmentaart@gmail.com",
         artwork_email_subject_value: "#{t('subject')} #{@artwork.title} (ID: #{@artwork.id})",
         artwork_email_body_value: "#{t('greeting')}\n\n#{t('interest')}\n#{t('name')}: #{@artwork.title}\n#{t('id')}: #{@artwork.id}\n#{t('price')}: #{number_to_currency(@artwork.price)}\n\n***#{t('payment_request').upcase} #{t('closing')}***",
-        artwork_email_message_value: t('disclaimer')
+        artwork_email_message_value: t('email_disclaimer')
       } %>
       
     <% if authenticated? %>
