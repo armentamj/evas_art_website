@@ -15,8 +15,11 @@ Rails.application.configure do
   # Turn on fragment caching in view templates.
   config.action_controller.perform_caching = true
 
+  # Enable serving static files from the `/public` folder
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present? || true
+
   # Cache assets for far-future expiry since they are all digest stamped.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+  config.public_file_server.headers = { "cache-control" => "public, max-age=31536000", "vary" => "Accept-Encoding" }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
